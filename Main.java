@@ -20,9 +20,17 @@ public class Main {
         employees.add(manager);
 
         for (Employee employee : employees) {
-            employee.work();
-            System.out.println("-" + employee.getName() + " (ID: " + employee.getId() + ", Position: " + employee.getPosition() + ", Hire date: " + 
-            employee.getHireDate() + ", Salary: " + employee.getSalary());
+            System.out.println(employee.getName() + "has code: " + employee.hashCode());
+        }
+
+        System.out.println("Comparing " + worker2.getName() + " with others:");
+        for (Employee employee : employees) {
+            if (worker2.equals(employee)) {
+                System.out.println(worker2.getName() + " equals " + employee.getName());
+            }
+            else {
+                System.out.println(worker2.getName() + " does not equal " + employee.getName());
+            }
         }
     }   
 }
