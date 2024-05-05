@@ -3,6 +3,9 @@ import company.models.Manager;
 import company.models.Worker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -18,18 +21,33 @@ public class Main {
         employees.add(worker3);
         employees.add(worker4);
         employees.add(manager);
+        employees.add(new Worker("Alicja", 7000, 6, "2021-06-30", "Product Manager"));
+        employees.add(new Worker("Ewa", 7000, 1, "2023-06-30", "Tester"));
+        employees.add(new Manager("Szymon", 7000, 5, "2022-06-30", "Team Lead"));
+
+        double totalSalary = 0, totalManagerSalary = 0, totalWorkerSalary = 0;
+        Map<Integer, Integer> idCount = new HashMap<>();
 
         for (Employee employee : employees) {
-            System.out.println(employee.getName() + "has code: " + employee.hashCode());
+            totalSalary += employee.getSalary();
+            if (employee instanceof Manager) {
+                totalManagerSalary += employee.getSalary();
+            }
+            else if (employee instanceof Worker) {
+                totalWorkerSalary += employee.getSalary();
+            }
+
+            idCount.put(employee.getId(), idCount.getOrDefault(employee.getId(), 0) + 1);
         }
 
-        System.out.println("Comparing " + worker2.getName() + " with others:");
-        for (Employee employee : employees) {
-            if (worker2.equals(employee)) {
-                System.out.println(worker2.getName() + " equals " + employee.getName());
-            }
-            else {
-                System.out.println(worker2.getName() + " does not equal " + employee.getName());
+        System.out.println("Total salary for all employees: " + totalSalary);
+        System.out.println("Total salary for all managers: " + totalManagerSalary);
+        System.out.println("Total salary for all workers: " + totalWorkerSalary);
+
+        System.out.println("Duplicate IDs found:");
+        for (Map.Entry<Integer, Integer> entry : idCount.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.println("ID " + entry.getKey() + " appears " + entry.getValue() + " times");
             }
         }
     }   
