@@ -12,6 +12,5 @@ public final class Worker extends Employee {
     @Override
     public void work() {
         System.out.println("Worker " + getName() + "is working...");
-    }
-    
+    }  
 }
